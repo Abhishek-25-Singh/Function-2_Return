@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include<stdexcept>
 
 //error C4716 : 'f1' : must return a value
 //int f1(){
@@ -49,6 +50,22 @@ void f6() {
 //	std::cout << "I am calling f7\n";
 //	return 99;
 //}
+int Baz(int x) {
+
+	if (x == 0) {
+		//handeled exception
+		throw std::exception("0 is out of range !");
+	}
+	//if (x == 0){
+	//	//Unhandled Exception
+	//	throw std::out_of_range("0 is out of Range !"); //throwing an exception
+	//}
+	//	
+	else if (x < 0) {
+		std::exit(1);//invoking a system function that doesn't return
+	}
+	return x * x;
+}
 
 
 int main()
@@ -59,6 +76,22 @@ int main()
 	f3();
 	std::cout << "Calling f3 :" << f3() << std::endl;
 	f6();
+	std::cout << "Baz returned " << Baz(10) << std:: endl;
+	//std::cout << "Baz returned " << Baz(0) << std::endl;
+	try {
+		std::cout << "Baz returned :" << Baz(0) << std::endl;
+	}
+	catch (std::exception& err) {
+		std::cout << err.what();
+	}
+	/*try {
+		std::cout << "Baz returned :" << Baz(0) << std::endl;
+	}
+	catch(std::out_of_range& err){
+		std::cout << err.what();
+	}*/
+	std::cout << "Baz returned " << Baz(-8) << std::endl;
+	std::cout << "Finished with main \n";
 	return 0;
 }
 
